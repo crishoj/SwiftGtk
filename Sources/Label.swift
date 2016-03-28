@@ -16,7 +16,7 @@ public class Label: Widget {
     
     public var text: String? {
         get {
-            return String.fromCString(gtk_label_get_text(UnsafeMutablePointer(widgetPointer)))
+            return String(cString: gtk_label_get_text(UnsafeMutablePointer(widgetPointer)))
         }
         set {
             if let text = newValue {

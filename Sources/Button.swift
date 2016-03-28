@@ -23,7 +23,7 @@ public class Button: Bin {
     
     public var label: String? {
         get {
-            return String.fromCString(gtk_button_get_label(UnsafeMutablePointer(widgetPointer)))
+            return String(cString: gtk_button_get_label(UnsafeMutablePointer(widgetPointer)))
         }
         set {
             if let title = newValue {

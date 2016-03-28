@@ -20,18 +20,18 @@ public class TextView: Container {
         addSignal("paste-clipboard") { [unowned self] in self.pasteClipboard?(self) }
         
         addSignal("insert-at-cursor") { [unowned self] (pointer: UnsafeMutablePointer<Void>) in
-            let string = String.fromCString(UnsafeMutablePointer(pointer))!
+            let string = String(cString: UnsafeMutablePointer(pointer))
             self.insertAtCursor?(self, string)
         }
         
         addSignal("preedit-changed") { [unowned self] (pointer: UnsafeMutablePointer<Void>) in
-            let string = String.fromCString(UnsafeMutablePointer(pointer))!
+            let string = String(cString: UnsafeMutablePointer(pointer))
             self.preeditChanged?(self, string)
         }
         
         addSignal("select-all") { [unowned self] (pointer: UnsafeMutablePointer<Void>) in
             // We need to get actual value of the pointer because it is not pointer but only integer.
-            let select = unsafeBitCast(pointer, Int.self).toBool()
+            let select = unsafeBitCast(pointer, to: Int.self).toBool()
             self.selectAll?(self, select)
         }
     }
